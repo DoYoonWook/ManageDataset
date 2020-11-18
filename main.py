@@ -1,57 +1,54 @@
 import os
 import pdb
 import xml.etree.ElementTree as ET
+from PIL import Image
 from xml.dom.minidom import parse
 from xml.etree.ElementTree import ElementTree, Element
+
 
 def read_xml(annoPath):
     tree = ET.parse(annoPath)
     root = tree.getroot()
-    xml_content = open(annoPath).read()
-    return tree, root, xml_content
+    # xmlContent = open(annoPath).read()
+    # return tree, root, xmlContent
+    return tree, root
+
+
 def test():
     imgRootPath = './test_voc/images/'
+    imgSavePath = './test_save_voc/images/'
     annoRootPath = './test_voc/annotations/'
-    # for file in os.listdir(annoRootPath):
-    #     domTree = parse(annoRootPath + file)
-    #     root = domTree.documentElement
+    annoSavePath = './test_save_voc/annotations/'
+    for file in os.listdir(annoRootPath):
+        fileName0 = os.path.splitext(file)[0]
+        tree, root = read_xml(annoRootPath + file)
+        objectList = root.findall('object')
+        objectListLen = len(objectList)
 
-    # 从xml文件中读取，使用getroot()获取根节点，得到的是一个Element对象
-    # tree = ET.parse(annoRootPath + './100009.xml')
-    # print('tree', type(tree))
-    # root = tree.getroot()
-    # print('root', type(root))
+        for i in range(0, objectListLen):
+            tree_temp, root_temp = read_xml(annoRootPath + file)
+            objectList = root_temp.findall('object')
+            for j in range(0, objectListLen):
+                if i == j:
+                    bndbox = objectList[j].find('bndbox')
+                    xmin = float(bndbox.find('xmin').text)
+                    ymin = float(bndbox.find('ymin').text)
+                    xmax = float(bndbox.find('xmax').text)
+                    ymax = float(bndbox.find('ymax').text)
+                    width = xmax - xmin
+                    height = ymax - ymin
+                    size = root_temp.find('size')
+                    size.find('width').text = str(width)
+                    size.find('height').text = str(height)
+                else:
+                    root_temp.remove(objectList[j])
+            # print(annoSavePath + fileName0 + '_' + str(i + 1) + 'wrap' + '.xml')
+            tree_temp.write(annoSavePath + fileName0 + '_' + str(i + 1) + 'wrap' + '.xml')
 
-    tree, root, xml_content = read_xml(annoRootPath + './100009.xml')
-    object_list = root.findall('object')
-    count = object_list
+            img = Image.open(imgRootPath + fileName0 + '.jpg')
+            region = img.crop((xmin, ymin, xmin + width, ymin + height))
+            region.save(imgSavePath + fileName0 + '_' + str(i + 1) + 'wrap' + '.jpg')
 
-    for i in range(0, count):
-
-
-
-
-
-
-    # 移除object
-    # for element in root.findall('object'):
-    #     tag = element.tag
-    #     attrib = element.attrib
-    #     text = element.find('name').text
-    #     print(tag, attrib, text)
-    #     root.remove(element)
-    # object_list = root.findall('object')
-    # print(len(object_list))
-    # for i in range(0, len(object_list)):
-
-
-
-    # for obj in root.iter('object'):
-    #     root.remove(obj)
-    #     print(obj[0].text)
-    #     # root.remove(obj)
-
-    tree.write('test.xml')
 
 
 if __name__ == '__main__':
