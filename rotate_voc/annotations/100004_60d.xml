@@ -1,0 +1,22 @@
+<annotation>
+  <folder>VOC2007</folder>
+  <filename>100004_60d.jpg</filename>
+  <segmented>0</segmented>
+  <size>
+    <width>407</width>
+    <height>387</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>pressure</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox updated="yes">
+      <xmin>257</xmin>
+      <ymin>293</ymin>
+      <xmax>401</xmax>
+      <ymax>456</ymax>
+    </bndbox>
+  </object>
+</annotation>

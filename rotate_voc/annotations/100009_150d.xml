@@ -1,0 +1,58 @@
+<annotation>
+  <folder>VOC2007</folder>
+  <filename>100009_150d.jpg</filename>
+  <segmented>0</segmented>
+  <size>
+    <width>511</width>
+    <height>396</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>lighter</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox updated="yes">
+      <xmin>331</xmin>
+      <ymin>284</ymin>
+      <xmax>391</xmax>
+      <ymax>356</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>lighter</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox updated="yes">
+      <xmin>222</xmin>
+      <ymin>368</ymin>
+      <xmax>319</xmax>
+      <ymax>424</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>lighter</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox updated="yes">
+      <xmin>262</xmin>
+      <ymin>351</ymin>
+      <xmax>353</xmax>
+      <ymax>404</ymax>
+    </bndbox>
+  </object>
+  <object>
+    <name>lighter</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox updated="yes">
+      <xmin>203</xmin>
+      <ymin>249</ymin>
+      <xmax>267</xmax>
+      <ymax>301</ymax>
+    </bndbox>
+  </object>
+</annotation>

@@ -1,0 +1,22 @@
+<annotation>
+  <folder>VOC2007</folder>
+  <filename>100006_90d.jpg</filename>
+  <segmented>0</segmented>
+  <size>
+    <width>402.0</width>
+    <height>734.0</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>knife</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox updated="yes">
+      <xmin>63</xmin>
+      <ymin>196</ymin>
+      <xmax>127</xmax>
+      <ymax>260</ymax>
+    </bndbox>
+  </object>
+</annotation>

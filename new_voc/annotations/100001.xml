@@ -1,0 +1,22 @@
+<annotation>
+  <folder>VOC2007</folder>
+  <filename>100001.xml</filename>
+  <segmented>0</segmented>
+  <size>
+    <width>407</width>
+    <height>247</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>lighter</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>240</xmin>
+      <ymin>88</ymin>
+      <xmax>306</xmax>
+      <ymax>124</ymax>
+    </bndbox>
+  </object>
+</annotation>

@@ -1,0 +1,22 @@
+<annotation>
+  <folder>VOC2007</folder>
+  <filename>100005_270d.jpg</filename>
+  <segmented>0</segmented>
+  <size>
+    <width>461.0</width>
+    <height>691.0</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>lighter</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox updated="yes">
+      <xmin>340</xmin>
+      <ymin>479</ymin>
+      <xmax>382</xmax>
+      <ymax>549</ymax>
+    </bndbox>
+  </object>
+</annotation>

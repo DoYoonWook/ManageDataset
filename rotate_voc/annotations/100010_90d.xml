@@ -1,0 +1,22 @@
+<annotation>
+  <folder>VOC2007</folder>
+  <filename>100010_90d.jpg</filename>
+  <segmented>0</segmented>
+  <size>
+    <width>321.0</width>
+    <height>267.0</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>scissors</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox updated="yes">
+      <xmin>6</xmin>
+      <ymin>193</ymin>
+      <xmax>92</xmax>
+      <ymax>254</ymax>
+    </bndbox>
+  </object>
+</annotation>
