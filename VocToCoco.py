@@ -6,19 +6,22 @@ import json
 import glob
 import xml.etree.ElementTree as ET
 
-#from https://www.php.cn/python-tutorials-424348.html
+
+# from https://www.php.cn/python-tutorials-424348.html
 def mkdir(path):
-    path=path.strip()
-    path=path.rstrip("\\")
-    isExists=os.path.exists(path)
+    path = path.strip()
+    path = path.rstrip("\\")
+    isExists = os.path.exists(path)
     if not isExists:
         os.makedirs(path)
-        print(path+' ----- folder created')
+        print(path + ' ----- folder created')
         return True
     else:
-        print(path+' ----- folder existed')
+        print(path + ' ----- folder existed')
         return False
-#foler to make, please enter full path
+
+
+# foler to make, please enter full path
 
 """
 main code below are from
@@ -75,6 +78,8 @@ def get_categories(xml_files):
 
 
 def convert(xml_files, json_file):
+    START_BOUNDING_BOX_ID = 1
+    PRE_DEFINE_CATEGORIES = None
     json_dict = {"images": [], "type": "instances", "annotations": [], "categories": []}
     if PRE_DEFINE_CATEGORIES is not None:
         categories = PRE_DEFINE_CATEGORIES
@@ -144,6 +149,7 @@ def convert(xml_files, json_file):
     json_fp.write(json_str)
     json_fp.close()
 
+
 def voc_to_coco():
     """
     You only need to set the following three parts
@@ -152,9 +158,9 @@ def voc_to_coco():
     3.voc_annotations : path to your VOC dataset Annotations
 
     """
-    val_files_num = 0
-    test_files_num = 0
-    voc_annotations = './VOC/Annotations/'  #remember to modify the path
+    val_files_num = int(0.15 * 3600)
+    test_files_num = int(0.15 * 3600)
+    voc_annotations = './ori_voc/annotations/'  # remember to modify the path
 
     split = voc_annotations.split('/')
     coco_name = split[-3]
@@ -171,22 +177,15 @@ def voc_to_coco():
 
     print(main_path)
 
-    coco_path = os.path.join(main_path, coco_name+'_COCO/')
-    coco_images = os.path.join(main_path, coco_name+'_COCO/images')
-    coco_json_annotations = os.path.join(main_path, coco_name+'_COCO/annotations/')
+    coco_path = os.path.join(main_path, coco_name + '_COCO/')
+    coco_images = os.path.join(main_path, coco_name + '_COCO/images')
+    coco_json_annotations = os.path.join(main_path, coco_name + '_COCO/annotations/')
     xml_val = os.path.join(main_path, 'xml', 'xml_val/')
     xml_test = os.path.join(main_path, 'xml/', 'xml_test/')
     xml_train = os.path.join(main_path, 'xml/', 'xml_train/')
 
-    voc_images = os.path.join(main_path, coco_name, 'JPEGImages/')
+    voc_images = os.path.join(main_path, coco_name, 'images/')
     print('voc_images:' + voc_images)
-
-
-
-
-
-
-
 
     mkdir(coco_path)
     mkdir(coco_images)
@@ -198,7 +197,7 @@ def voc_to_coco():
     # voc_images = '.' + voc_images
     # coco_images = '.' + coco_images
 
-    #voc images copy to coco images
+    # voc images copy to coco images
     for i in os.listdir(voc_images):
         img_path = os.path.join(voc_images + i)
         shutil.copy(img_path, coco_images)
@@ -250,10 +249,8 @@ def voc_to_coco():
 
     # pip install lxml
 
-
     START_BOUNDING_BOX_ID = 1
     PRE_DEFINE_CATEGORIES = None
-
 
     # If necessary, pre-define category and its id
     #  PRE_DEFINE_CATEGORIES = {"aeroplane": 1, "bicycle": 2, "bird": 3, "boat": 4,
@@ -262,15 +259,14 @@ def voc_to_coco():
     #  "motorbike": 14, "person": 15, "pottedplant": 16,
     #  "sheep": 17, "sofa": 18, "train": 19, "tvmonitor": 20}
 
-
-
     xml_val_files = glob.glob(os.path.join(xml_val, "*.xml"))
     xml_test_files = glob.glob(os.path.join(xml_test, "*.xml"))
     xml_train_files = glob.glob(os.path.join(xml_train, "*.xml"))
 
     convert(xml_val_files, coco_json_annotations + 'val2017.json')
-    convert(xml_test_files, coco_json_annotations+'test2017.json')
+    convert(xml_test_files, coco_json_annotations + 'test2017.json')
     convert(xml_train_files, coco_json_annotations + 'train2017.json')
+
 
 if __name__ == '__main__':
     voc_to_coco()
