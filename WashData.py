@@ -23,7 +23,7 @@ def wash_data(xmlRootPath, xmlSavePath, imgRootPath, imgSavePath):
         fileName0 = os.path.splitext(file)[0]
         tree = ET.parse(xmlRootPath + file)
         fileName = tree.find('filename').text  # it is origin name
-        tree.find('filename').text = file  # change file name to rot degree name
+        tree.find('filename').text = fileName0 + '.jpg'  # change file name to rot degree name
         print(xmlSavePath + file)
         tree.write(xmlSavePath + file)
         shutil.copy(imgRootPath + fileName0 + '.jpg', imgSavePath + fileName0 + '.jpg')
@@ -31,8 +31,8 @@ def wash_data(xmlRootPath, xmlSavePath, imgRootPath, imgSavePath):
 
 
 if __name__ == '__main__':
-    xmlRootPath = './test_voc/annotations/'
-    xmlSavePath = './new_voc/annotations/'
-    imgRootPath = './test_voc/images/'
-    imgSavePath = './new_voc/images/'
+    xmlRootPath = './ori_voc/annotations/'
+    xmlSavePath = './ori_voc_coco/annotations/'
+    imgRootPath = './ori_voc/images/'
+    imgSavePath = './ori_voc_coco/images/'
     wash_data(xmlRootPath, xmlSavePath, imgRootPath, imgSavePath)

@@ -1,0 +1,28 @@
+import os
+
+
+def check(directory1, directory2):
+    fileList1 = os.listdir(directory1)
+    fileList2 = os.listdir(directory2)
+    temp1 = []
+    temp2 = []
+
+    for file in fileList1:
+        fileName0 = os.path.splitext(file)[0]
+        file = fileName0
+        temp1.append(file)
+
+    for file in fileList2:
+        fileName0 = os.path.splitext(file)[0]
+        file = fileName0
+        temp2.append(file)
+
+    print('judge', set(temp1).difference(set(temp2)))
+
+
+if __name__ == '__main__':
+    directory1 = './wrap_voc_val_save/images/'
+    directory2 = './wrap_voc_val_save/annotations/'
+    # directory1 = './ok_voc/images/'
+    # directory2 = './ok_voc/annotations/'
+    check(directory1, directory2)

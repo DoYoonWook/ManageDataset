@@ -5,7 +5,10 @@ import sys
 import json
 import glob
 import xml.etree.ElementTree as ET
-
+'''
+voc 转 coco 附带随机分的功能
+'''
+random.seed(1)
 
 # from https://www.php.cn/python-tutorials-424348.html
 def mkdir(path):
@@ -48,11 +51,11 @@ def get_and_check(root, name, length):
     return vars
 
 
-def get_filename_as_int(filename):
+def get_filename_as_str(filename):
     try:
         filename = filename.replace("\\", "/")
         filename = os.path.splitext(os.path.basename(filename))[0]
-        return int(filename)
+        return str(filename)
     except:
         raise ValueError("Filename %s is supposed to be an integer." % (filename))
 
@@ -97,10 +100,10 @@ def convert(xml_files, json_file):
         else:
             raise ValueError("%d paths found in %s" % (len(path), xml_file))
         ## The filename must be a number
-        image_id = get_filename_as_int(filename)
+        image_id = get_filename_as_str(filename)
         size = get_and_check(root, "size", 1)
-        width = int(get_and_check(size, "width", 1).text)
-        height = int(get_and_check(size, "height", 1).text)
+        width = float(get_and_check(size, "width", 1).text)
+        height = float(get_and_check(size, "height", 1).text)
         image = {
             "file_name": filename,
             "height": height,
@@ -158,9 +161,9 @@ def voc_to_coco():
     3.voc_annotations : path to your VOC dataset Annotations
 
     """
-    val_files_num = int(0.15 * 3600)
-    test_files_num = int(0.15 * 3600)
-    voc_annotations = './ori_voc/annotations/'  # remember to modify the path
+    val_files_num = 500
+    test_files_num = 500
+    voc_annotations = './ok_voc/annotations/'  # remember to modify the path
 
     split = voc_annotations.split('/')
     coco_name = split[-3]
@@ -262,10 +265,11 @@ def voc_to_coco():
     xml_val_files = glob.glob(os.path.join(xml_val, "*.xml"))
     xml_test_files = glob.glob(os.path.join(xml_test, "*.xml"))
     xml_train_files = glob.glob(os.path.join(xml_train, "*.xml"))
+    print(xml_train_files)
 
-    convert(xml_val_files, coco_json_annotations + 'val2017.json')
-    convert(xml_test_files, coco_json_annotations + 'test2017.json')
-    convert(xml_train_files, coco_json_annotations + 'train2017.json')
+    convert(xml_val_files, coco_json_annotations + 'val.json')
+    convert(xml_test_files, coco_json_annotations + 'test.json')
+    convert(xml_train_files, coco_json_annotations + 'train.json')
 
 
 if __name__ == '__main__':
